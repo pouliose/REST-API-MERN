@@ -56,19 +56,8 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const getUserProfile = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
-    if (user) {
-        res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email
-
-        });
-    } else {
-        res.status(401);
-        throw new Error('Invalid email or password');
-    }
-});
+        res.status(200).json(req.user);
+})
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
